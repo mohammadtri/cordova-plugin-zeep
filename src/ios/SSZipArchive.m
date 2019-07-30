@@ -127,9 +127,9 @@
     if ([delegate respondsToSelector:@selector(zipArchiveWillUnzipArchiveAtPath:zipInfo:)]) {
         [delegate zipArchiveWillUnzipArchiveAtPath:path zipInfo:globalInfo];
     }
-    if ([delegate respondsToSelector:@selector(zipArchiveProgressEvent:total:)]) {
-        [delegate zipArchiveProgressEvent:currentPosition total:fileSize];
-    }
+//     if ([delegate respondsToSelector:@selector(zipArchiveProgressEvent:total:)]) {
+//         [delegate zipArchiveProgressEvent:currentPosition total:fileSize];
+//     }
     
     NSInteger currentFileNumber = 0;
     do {
@@ -172,9 +172,9 @@
                 [delegate zipArchiveWillUnzipFileAtIndex:currentFileNumber totalFiles:(NSInteger)globalInfo.number_entry
                                              archivePath:path fileInfo:fileInfo];
             }
-            if ([delegate respondsToSelector:@selector(zipArchiveProgressEvent:total:)]) {
-                [delegate zipArchiveProgressEvent:(NSInteger)currentPosition total:(NSInteger)fileSize];
-            }
+//             if ([delegate respondsToSelector:@selector(zipArchiveProgressEvent:total:)]) {
+//                 [delegate zipArchiveProgressEvent:(NSInteger)currentPosition total:(NSInteger)fileSize];
+//             }
             
             char *filename = (char *)malloc(fileInfo.size_filename + 1);
             if (filename == NULL)
@@ -334,9 +334,9 @@
             if ([delegate respondsToSelector:@selector(zipArchiveDidUnzipFileAtIndex:totalFiles:archivePath:fileInfo:)]) {
                 [delegate zipArchiveDidUnzipFileAtIndex:currentFileNumber totalFiles:(NSInteger)globalInfo.number_entry
                                             archivePath:path fileInfo:fileInfo];
-            } else if ([delegate respondsToSelector: @selector(zipArchiveDidUnzipFileAtIndex:totalFiles:archivePath:unzippedFilePath:)]) {
-                [delegate zipArchiveDidUnzipFileAtIndex: currentFileNumber totalFiles: (NSInteger)globalInfo.number_entry
-                                            archivePath:path unzippedFilePath: fullPath];
+//             } else if ([delegate respondsToSelector: @selector(zipArchiveDidUnzipFileAtIndex:totalFiles:archivePath:unzippedFilePath:)]) {
+//                 [delegate zipArchiveDidUnzipFileAtIndex: currentFileNumber totalFiles: (NSInteger)globalInfo.number_entry
+//                                             archivePath:path unzippedFilePath: fullPath];
             }
             
             currentFileNumber++;
@@ -371,10 +371,10 @@
     if (success && [delegate respondsToSelector:@selector(zipArchiveDidUnzipArchiveAtPath:zipInfo:unzippedPath:)]) {
         [delegate zipArchiveDidUnzipArchiveAtPath:path zipInfo:globalInfo unzippedPath:destination];
     }
-    // final progress event = 100%
-    if (!canceled && [delegate respondsToSelector:@selector(zipArchiveProgressEvent:total:)]) {
-        [delegate zipArchiveProgressEvent:fileSize total:fileSize];
-    }
+//     // final progress event = 100%
+//     if (!canceled && [delegate respondsToSelector:@selector(zipArchiveProgressEvent:total:)]) {
+//         [delegate zipArchiveProgressEvent:fileSize total:fileSize];
+//     }
     
     NSError *retErr = nil;
     if (crc_ret == UNZ_CRCERROR)
